@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="layout::head"></head>
+<body>
+<!-- 전체 페이지를 flexbox 컨테이너로 만듭니다 -->
+<div class="d-flex flex-column min-vh-100">
+
+<!-- 메뉴 바   -->
+<nav th:replace="layout::navi"></nav>
+
+<!--메뉴-->
+<nav th:replace="layout::menu" style="justify-content: center"></nav>
+
+<!-- 페이지 콘텐츠 -->
+<div class="container flex-grow-1 d-flex" style="margin-top: 30px">
+
+    <!-- 왼쪽 고정 네브바       -->
+    <nav th:replace="layout::bar4"></nav>
+
+<div class="container my-3">
+    <!-- 여기부터 시작 -->
+    <h5 class="border-bottom pb-2">질문등록</h5>
+    <form th:object="${questionForm}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <!-- 모든 에러메세지 표시  -->
+        <div th:replace="layout::formErrors"></div>
+        <div class="mb-3">
+            <label class="form-label">제목</label>
+            <input type="text" th:field="${questionForm.subject}" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">내용</label>
+            <textarea th:field="${questionForm.content}" class="form-control" rows="10"></textarea>
+        </div>
+
+        <div class="container mt-3">
+
+
+        <input type="button" value="목록" class="btn btn-sm btn-outline-primary float-end my-2" onclick="window.location.href='/question/list'"/>
+        <input type="submit"  value="저장하기"  class="btn btn-sm btn-outline-primary float-end my-2 " style="margin-right: 5px"  />
+        </div>
+    </form>
+
+
+</div>
+</div>
+</div>
+<footer th:replace="layout::footer"></footer>
+
+</body>
+</html>

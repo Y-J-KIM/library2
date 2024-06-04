@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="layout::head"></head>
+<body>
+<!-- 전체 페이지를 flexbox 컨테이너로 만듭니다 -->
+<div class="d-flex flex-column min-vh-100">
+
+    <!-- 메뉴 바   -->
+    <nav th:replace="layout::navi"></nav>
+
+    <!--메뉴-->
+    <nav th:replace="layout::menu" style="justify-content: center"></nav>
+
+    <!-- 왼쪽 고정 네브바  -->
+    <div th:replace="layout::my"></div>
+
+    <!-- 오른쪽 컨텐츠   -->
+    <div class="container my-3 flex-grow-1">
+
+<!--    &lt;!&ndash; 페이지 콘텐츠 &ndash;&gt;-->
+<!--    <div class="container flex-grow-1 d-flex" style="margin-top: 100px">-->
+<!--        <a th:href="@{/user/update/__${userID}__}">회원정보 수정</a>-->
+<!--        <a th:href="@{/question/user/mypage/question}" class="btn btn-sm btn-outline-dark float-end">질문 조회하기</a>-->
+
+<!--    </div>-->
+</div>
+</div>
+</body>
+</html>

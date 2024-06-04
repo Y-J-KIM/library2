@@ -1,0 +1,131 @@
+
+html, body {
+    height: 100%;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+}
+
+
+/*.dropdown:hover .dropdown-menu {*/
+/*    display: block;*/
+/*    margin-top: 0;*/
+/*}*/
+
+
+
+
+/* 메인 메뉴 스타일 */
+.main-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* 메뉴를 가로로 정렬합니다. */
+}
+
+/* 메인 메뉴 아이템 스타일 */
+.main-menu div {
+    position: relative;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* 하위 메뉴 스타일 */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    /*background-color: #444;*/
+    /*padding: 10px;*/
+    /*z-index: 1;*/
+}
+
+/* 하위 메뉴 아이템 스타일 */
+.dropdown-menu div {
+    /*padding: 5px 0;*/
+    font-size: 15px;
+}
+
+/* 메인 메뉴 아이템 호버 시 하위 메뉴 표시 */
+.main-menu div:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /* 추가한 스타일 */
+
+}
+
+.container {
+    flex-grow: 1;
+}
+
+.hover-effect:hover{
+    color: #a6a4a1
+}
+
+/* Sidebar styling */
+#sidebar-wrapper {
+    width: 180px;
+    height: 140px;
+    margin-top: 100px;
+    border: 1px solid #6c757d;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+    background-color: #4e8fea;
+    color: white;
+
+}
+
+#sidebar-wrapper .sidebar-heading .list-group {
+    width: 150px;
+}
+
+
+
+/* Ensure the sidebar and content take full height */
+.container-fluid {
+    display: flex;
+    height: 100%;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+/* Footer styling */
+footer {
+    background-color: #f8f9fa;
+    padding: 1rem 0;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+ /* 아코디언 */
+ .accordion {
+
+     cursor: pointer;
+     padding: 18px;
+     width: 100%;
+     text-align: left;
+     border: none;
+     outline: none;
+     transition: 0.4s;
+ }
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+
+

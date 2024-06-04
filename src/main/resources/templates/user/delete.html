@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>delete</title>
+</head>
+
+<body>
+<h2>[계정 탈퇴 페이지]</h2>
+
+<p>정말로 계정을 탈퇴하시겠습니까?</p>
+
+<div th:text="${userID}"></div>
+
+<form th:action="@{/user/delete}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{idx}">
+    <input type="submit" value="탈퇴">
+</form>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head"></head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<body>
+<!-- 전체 페이지를 flexbox 컨테이너로 만듭니다 -->
+<div class="d-flex flex-column min-vh-100">
+<!--상단 메뉴 바   -->
+<nav th:replace="layout::navi"></nav>
+
+<!--메뉴-->
+    <nav th:replace="layout::menu" style="justify-content: center"></nav>
+
+    <!-- 페이지 콘텐츠 -->
+    <div class="container flex-grow-1 d-flex" style="margin-top: 30px">
+
+    <!-- 왼쪽 고정 네브바       -->
+        <div th:replace="layout::bar4"></div>
+
+    <!-- 오른쪽 FAQ 컨텐츠 -->
+    <div class="container my-3 flex-grow-1">
+        <div class="container-xxl bg-light text-center">
+            <h1>FAQ</h1>
+        </div>
+
+        <div id="faq-container">
+            <!-- FAQ 항목들을 반복하여 표시 -->
+            <div th:each="faq : ${faqs}">
+                <button class="accordion" th:text="${faq.subject}"></button>
+                <div class="panel">
+                    <p th:text="${faq.content}"></p>
+                </div>
+            </div>
+        </div>
+        
+
+
+                <div class="accordion" id="accordionExample">
+            <!-- 질문 1  -->
+            <div class="accordion-item">
+                <h4 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        도서관 자료를 이용하다가 분실 또는 훼손했어요.
+                    </button>
+                </h4>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+            <p>도서관 자료의 파 · 훼손으로 인한 변상 내용은 다음과 같습니다.
+                <br>
+                <br>
+                [도서관 자료(도서․비도서 등)를 훼손이나 분실하였을 경우]
+                <br>
+                • 현품(동일 자료)으로 변상
+                <br>
+                • 동일자료로 변상이 어려울 경우엔 사서가 제시하는 동일한 가격대의 대체도서로 구매 변상
+                <br>
+                <br>
+                [변상할 자료의 정도]
+                <br>
+                • 낱장 분실
+                <br>
+                • 액체에 의한 오염
+                <br>
+                • 펜, 형광펜 낙서
+                <br>
+                • 공중이 더 이상 이용할 수 없을 정도의 파 · 훼손
+                <br>
+                • 자료의 본래 형태를 찾아 볼 수 없는 정도의 파 · 훼손 등</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 질문 2 -->
+            <div class="accordion-item">
+                <h4 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        대출한 도서의 반납기일이 지났습니다. 어떻게 해야 하나요?
+                    </button>
+                </h4>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>도서관에서는 도서연체료를 받지 않으나, 대출한 도서의 반납기일이 지나게 되면 연체일수만큼 대출이 정지됩니다.
+                        예를 들어 도서 2권을 대출 후 반납기일이 1주일이 지나 반납하게 되면, "7일(연체일수)”간 도서의 대출이 제한됩니다.
+                        다른 도서 대출은 연체일수가 모두 지난 후 이용이 가능합니다.</p>
+                    </div>
+                </div>
+            </div>
+            <!--  질문 3  -->
+            <div class="accordion-item">
+                <h4 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                     빌릴 수 있는 책의 권수와 대출기간을 알고 싶습니다.
+                    </button>
+                </h4>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                     <div class="accordion-body">
+                         <p>대출은 참고자료, 연속간행물을 제외한 대출가능 도서에 대해 가능하며, 대출 시에는 반드시 본인의 회원증을 소지하셔야 합니다.
+                            <br>
+                            <br>
+                             • 회원증 소지자 : 1인당 5권, 14일간 대출
+                             <br>
+                             <br>
+                             빌린 도서는 1회에 한하여 7일 대출연장이 가능합니다. (단, 당일 연장이 불가하며 예약되지 않은 도서에 한함)</p>
+                     </div>
+                </div>
+            </div>
+            <!-- 질문 4   -->
+            <div class="accordion-item">
+                <h4 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    도서관의 휴관일은 어떻게 되나요?
+                    </button>
+                </h4>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>
+                        도서관은 아래의 기준에 따라 휴관일을 지정하고 있습니다.
+                        <br>
+                        <br>
+                        • 정기휴관일
+                        <br>
+                        • 일요일을 제외한 법정공휴일 및 대체공휴일
+                        <br>
+                        • 도서관의 장서점검 및 도서정리, 시설의 수리 등 도서관장이 필요하다고 인정할 때
+                        <br>
+                        <br>
+                        정기휴관일을 월요일로 정한 것은 도서관 업무효율 증대 및 시민의 휴관일 인식 편의 등을 고려하여 정한 사항으로, 관내 소규모 공공도서관을 제외한 도서관 휴관일은 인근 도서관과 격주 교차 휴관함으로써 시민의 불편을 최소화하고 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 글쓰기 버튼 (관리자만) -->
+        <div >
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/faq/create}" class="btn btn-sm btn-outline-primary float-end my-2">글쓰기</a>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- footer  -->
+<footer th:replace="layout::footer"></footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

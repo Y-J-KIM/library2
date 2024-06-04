@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="layout::head"></head>
+<body>
+<!-- 전체 페이지를 flexbox 컨테이너로 만듭니다 -->
+<div class="d-flex flex-column min-vh-100">
+
+<!-- 메뉴 바   -->
+<nav th:replace="layout::navi"></nav>
+
+<!--메뉴-->
+<nav th:replace="layout::menu" style="justify-content: center"></nav>
+
+<!-- 페이지 콘텐츠 -->
+<div class="container flex-grow-1 d-flex" style="margin-top: 100px">
+
+    <!-- 왼쪽 고정 네브바       -->
+    <div th:replace="layout::bar4" style="margin-bottom: 100px"></div>
+
+    <!-- 질문 -->
+    <div class="container my-3 flex-glow-1">
+    <h2 class="border-bottom py-2" th:text="${question.QSubject}"></h2>
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="card-text" style="white-space: pre-line;" th:text="${question.QContent}"></div>
+                    <div class="d-flex justify-content-end">
+                    <!--    수정일자   -->
+                        <div th:if="${question.modifyDate != null}" class="badge bg-light text-dark p-2 text-start mx-3">
+                            <div class="mb-2">수정</div>
+                            <div th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                        <!--  유저네임과 작성일자   -->
+                        <div class="badge bg-light text-dark p-2 text-start">
+                            <div class="mb-2">
+                                <span th:if="${question.author != null}" th:text="${question.author.name}"></span>
+                            </div>
+                            <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        </div>
+                    </div>
+                <a th:href="@{|/question/modify/${question.QIdx}|}" class="btn btn-sm btn-outline-secondary"
+                   sec:authorize="isAuthenticated()"
+                   th:if="${question.author != null and  #authentication.name == question.author.name}"
+                   th:text="'수정'">
+                </a>
+
+                <a th:href="@{|/question/delete/${question.QIdx}|}" onclick="return confirm('정말 삭제할까요?')"
+                   class="delete btn btn-sm btn-outline-secondary"
+                   sec:authorize="isAuthenticated()"
+                   th:if="${question.author != null and  #authentication.name == question.author.name}"
+                   th:text="삭제">
+                </a>
+                </div>
+            </div>
+        </div>
+
+</div>
+<div class="container my-3 flex-grow-1">
+<!--    &lt;!&ndash; 답변의 갯수 표시 &ndash;&gt;-->
+<!--    <h5 class="border-bottom my-3 py-2"-->
+<!--        th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>-->
+    <!-- 답변 반복 시작 -->
+    <div class="card my-3" th:each="answer : ${question.answerList}">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;" th:text="${answer.AContent}"></div>
+            <div class="d-flex justify-content-end">
+                <!-- 수정일자 -->
+                <div th:if="${answer.modifyDate != null}" class="badge bg-light text-dark p-2 text-start mx-3">
+                    <div class="mb-2">수정</div>
+                    <div th:text="${#temporals.format(answer.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
+                </div>
+                <!--  유저네임과 작성일자   -->
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2">
+                        <span th:if="${answer.author != null}" th:text="${answer.author.name}"></span>
+                    </div>
+                    <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                </div>
+            </div>
+            <div class="my-3">
+                <a th:href="@{|/answer/modify/${answer.AIdx}|}" class="btn btn-sm btn-outline-secondary"
+                   sec:authorize="hasRole('ADMIN')"
+               th:text="수정"></a>
+                <a th:href="@{|/answer/delete/${answer.AIdx}|}" onclick="return confirm('댓글을 삭제할까요?')"
+                   class="delete btn btn-sm btn-outline-secondary" sec:authorize="hasRole('ADMIN')"
+                   th:text="삭제"></a>
+            </div>
+        </div>
+    </div>
+    <!-- 답변 반복 끝  -->
+
+    <!-- 답변 작성 -->
+    <form th:action="@{|/answer/create/${question.QIdx}|}" th:object="${answerForm}" method="post" class="my-3">
+        <div th:replace="layout::formErrors"></div>
+<!--        <textarea sec:authorize="isAnonymous()" disabled th:field="${answerForm.content}" rows="10" class="form-control"></textarea>-->
+        <textarea sec:authorize="hasRole('ADMIN')" th:field="${answerForm.content}" rows="10" class="form-control"></textarea>
+        <input type="button"  value="목록" class="btn btn-sm btn-outline-primary float-end my-2" onclick="window.location.href='/question/list'"/>
+        <input type="submit" sec:authorize="hasRole('ADMIN')" value="답변등록" class="btn btn-sm btn-outline-primary float-end my-2" style="margin-right: 5px">
+    </form>
+</div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer th:replace="layout::footer"></footer>
+
+</body>
+</html>

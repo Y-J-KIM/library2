@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head"></head>
+<body>
+<!-- 전체 페이지를 flexbox 컨테이너로 만듭니다 -->
+<div class="d-flex flex-column min-vh-100">
+    <!--상단 메뉴 바   -->
+    <nav th:replace="layout::navi"></nav>
+
+    <!--메뉴-->
+    <nav th:replace="layout::menu" style="justify-content: center"></nav>
+
+    <!-- 페이지 콘텐츠 -->
+    <div class="container flex-grow-1 d-flex" style="margin-top: 30px">
+
+        <!-- 왼쪽 고정 네브바       -->
+        <div th:replace="layout::bar4"></div>
+
+        <!--  오른쪽 faq 폼      -->
+        <div class="container my-3">
+            <form th:action="@{/faq/create}" th:object="${faqForm}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">제목</label>
+                    <input type="text" th:field="${faqForm.subject}" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">내용</label>
+                    <textarea th:field="${faqForm.content}" class="form-control" rows="10"></textarea>
+                </div>
+                <div class="container mt-3">
+                    <input type="button" value="목록" class="btn btn-sm btn-outline-primary float-end my-2" onclick="window.location.href='/faq'"/>
+                    <input type="submit"  value="저장하기"  class="btn btn-sm btn-outline-primary float-end my-2 " style="margin-right: 5px">
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- footer  -->
+<footer th:replace="layout::footer"></footer>
+
+<script>
+    document.getElementById('faqForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // 기본 폼 제출 동작 방지
+        const subject = document.getElementById('subject').value;
+        const content = document.getElementById('content').value;
+
+        fetch('/faq/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ subject: subject, content: content })
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('FAQ가 성공적으로 추가되었습니다.');
+                    window.location.href = '/faq'; // FAQ 목록 페이지로 리디렉션
+                } else {
+                    alert('FAQ 추가에 실패했습니다.');
+                }
+            });
+    });
+</script>
+</body>
+</html>
+

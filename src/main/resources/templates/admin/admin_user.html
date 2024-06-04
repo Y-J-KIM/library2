@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="layout::head"></head>
+<body>
+
+<!-- 전체 페이지를 flexbox 컨테이너로 만듭니다 -->
+<div class="d-flex flex-column min-vh-100">
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-3">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">도서관</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!--  오른쪽 메뉴   -->
+                <ul class="navbar-nav ms-auto me-5 mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 페이지 콘텐츠 -->
+    <div class="container flex-grow-1 d-flex" style="margin-top: 30px">
+
+        <!-- 왼쪽 고정 네브바       -->
+        <div th:replace="layout::admin"></div>
+
+<div class="container">
+    <h1>회원 목록</h1>
+    <table class="table text-center">
+        <thead class="table-dark">
+        <tr>
+            <th>번호</th>
+            <th>회원 이름</th>
+            <th>회원 메일</th>
+            <th>게시글 수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.idx}" ></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.email}"></td>
+            <td >
+                <a th:href="@{/question/list}" th:text="${user.questionCount}"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

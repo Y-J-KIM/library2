@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org" xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:fragment = "head">
+        <meta charset = "UTF-8"/>
+        <meta name = "viewport" content = "width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <!-- Bootstrap CSS -->
+        <link rel = "stylesheet" type = "text/css" th:href = "@{/css/bootstrap.min.css}"/>
+        <!-- CSS -->
+        <link rel = "stylesheet" type = "text/css" th:href = "@{/css/style.css}"/>
+        <title>도서관</title>
+        <!-- Bootstrap js  -->
+        <script defer th:src = "@{/js/bootstrap.bundle.min.js}"></script>
+        <!--    <script th:src="@{/menu.js}"</script>-->
+    </head>
+    <body>
+        <!-- th:fragment="이름" 으로 공통 태그부분 작성 -->
+        <!-- 모든 에러메세지 표시  -->
+        <div th:fragment = "formErrors" class = "alert alert-danger" role = "alert" th:if = "${#fields.hasAnyErrors()}">
+            <div th:each = "err : ${#fields.allErrors()}" th:text = "${err}"/>
+        </div>
+
+        <!-- 네비게이션 메뉴 -->
+        <nav th:fragment = "navi" class = "navbar navbar-expand-lg navbar-light border-bottom mb-3"
+             style = "background-color: #4e8fea">
+            <div class = "container-fluid" style = "color: #ffffff">
+                <a class = "navbar-brand" style = "color: #ffffff" th:href = "@{/}">도서관</a>
+                <button class = "navbar-toggler" type = "button" data-bs-toggle = "collapse"
+                        data-bs-target = "#navbarSupportedContent"
+                        aria-controls = "navbarSupportedContent" aria-expanded = "false"
+                        aria-label = "Toggle navigation">
+                    <span class = "navbar-toggler-icon"></span>
+                </button>
+                <div class = "collapse navbar-collapse" id = "navbarSupportedContent">
+
+                    <!--  오른쪽 메뉴   -->
+                    <ul class = "navbar-nav ms-auto me-5 mb-2 mb-lg-0">
+                        <li class = "nav-item my-2" sec:authorize = "isAuthenticated()">
+                            <span sec:authentication = "name"></span> 님
+                            <!--<span sec:authentication = "principal.authorities"></span>-->
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link" style = "color: #ffffff" sec:authorize = "isAnonymous()"
+                               th:href = "@{/user/login}">로그인</a>
+                            <a class = "nav-link" style = "color: #ffffff" sec:authorize = "isAuthenticated()"
+                               th:href = "@{/user/logout}">로그아웃</a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link" style = "color: #ffffff" sec:authorize = "isAnonymous()"
+                               th:href = "@{/user/register}">회원가입</a>
+                            <a class = "nav-link" style = "color: #ffffff" sec:authorize = "hasRole('USER')"
+                               th:href = "@{/user/mypage}">마이페이지</a>
+                            <a class = "nav-link" style = "color: #ffffff" sec:authorize = "hasRole('ADMIN')"
+                               th:href = "@{/admin}">관리자페이지</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 메뉴-->
+        <div class = "container2">
+            <nav th:fragment = "menu" class = "navbar navbar-light mb-3 " style = "justify-content: center">
+
+                <ul class = "main-menu">
+                    <div class = "dropdown">
+                        <h5 style = "font-weight: 700" onclick = "location.href='/books/search'; return false;">
+                            도서검색</h5>
+                        <!--            <ul class="dropdown-menu">-->
+                        <!--                <div >도서 검색</div>-->
+                        <!--            </ul>-->
+                    </div>
+                    <div class = "dropdown">
+                        <h5 style = "font-weight: 700">이용 안내</h5>
+                        <ul class = "dropdown-menu">
+                            <div onclick = "location.href='/guide/time'; return false;">이용 시간</div>
+                            <div onclick = "location.href='/guide/data'; return false;">자료 이용</div>
+                        </ul>
+                    </div>
+                    <div class = "dropdown">
+                        <h5 style = "font-weight: 700">질문게시판</h5>
+                        <ul class = "dropdown-menu">
+                            <div onclick = "location.href='/question/list'; return false;">Q&A</div>
+                            <div onclick = "location.href='/faq'; return false;">FAQ</div>
+                        </ul>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- 왼쪽 질문게시판 메뉴  -->
+
+        <nav th:fragment = "bar4" class = "navbar-nav me-auto mb-2 mb-lg-0">
+            <div class = " border-right" id = "sidebar-wrapper">
+                <div class = "sidebar-heading">질문게시판</div>
+                <div class = "list-group list-group-flush">
+                    <a th:href = "@{/question/list}" class = "list-group-item list-group-item-action ">Q&A</a>
+                    <a th:href = "@{/faq}" class = "list-group-item list-group-item-action ">FAQ</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 왼쪽 이용 안내 메뉴-->
+        <nav th:fragment = "bar3" class = "navbar-nav me-auto mb-2 mb-lg-0">
+            <div class = " border-right" id = "sidebar-wrapper">
+                <div class = "sidebar-heading">이용 안내</div>
+                <div class = "list-group list-group-flush">
+                    <a th:href = "@{/guide/time}" class = "list-group-item list-group-item-action ">이용 시간 / 휴관일</a>
+                    <a th:href = "@{/guide/data}" class = "list-group-item list-group-item-action ">자료 이용</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 마이페이지 왼쪽 메뉴-->
+        <nav th:fragment = "my" class = "navbar-nav me-auto mb-2 mb-lg-0">
+            <div class = " border-right" id = "sidebar-wrapper">
+                <div class = "sidebar-heading">이용 안내</div>
+                <div class = "list-group list-group-flush">
+                    <a th:href = "@{/update/__${userID}__}" class = "list-group-item list-group-item-action">회원 정보
+                                                                                                             수정</a>
+                    <a th:href = "@{/rent-list}" class = "list-group-item list-group-item-action ">대여 조회</a>
+                    <a th:href = "@{/reservation-list}" class = "list-group-item list-group-item-action ">예약 조회</a>
+                    <a th:href = "@{/question/user/mypage/question}" class = "list-group-item list-group-item-action ">나의
+                                                                                                                       질문</a>
+                    <a th:href = "@{/user/delete}" class = "list-group-item list-group-item-action ">계정 탈퇴</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 관리자 페이지 왼쪽 메뉴 -->
+        <nav th:fragment = "admin" class = "navbar-nav me-auto mb-2 mb-lg-0">
+            <div class = "border-right" id = "sidebar-wrapper">
+                <div class = "sidebar-heading">관리자 페이지</div>
+                <div class = "list-group list-group-flush">
+                    <a th:href = "@{/admin/user}" class = "list-group-item list-group-item-action">회원 관리</a>
+                    <a th:href = "@{/admin/rents}" class = "list-group-item list-group-item-action">대출 관리</a>
+                    <a th:href = "@{/admin/reservations}" class = "list-group-item list-group-item-action">예약 관리</a>
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- footer -->
+        <div th:fragment = "footer">
+            <footer class = "footer mt-auto py-3 bg-light">
+                <div class = "container">
+                    <span class = "text-muted">© 2024 Your Company. All rights reserved.</span>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>

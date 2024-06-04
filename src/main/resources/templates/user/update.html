@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head"></head>
+<body>
+<!-- 전체 페이지를 flexbox 컨테이너로 만듭니다 -->
+<div class="d-flex flex-column min-vh-100">
+
+    <!-- 메뉴 바   -->
+    <nav th:replace="layout::navi"></nav>
+
+    <!--메뉴-->
+    <nav th:replace="layout::menu" style="justify-content: center"></nav>
+
+    <!-- 페이지 콘텐츠 -->
+    <div class="container flex-grow-1 d-flex" style="margin-top: 100px">
+
+        <!-- 왼쪽 고정 네브바  -->
+        <div th:replace="layout::my"></div>
+
+        <!-- 오른쪽 컨텐츠   -->
+        <div class="container my-3 flex-grow-1">
+
+    <h2>[회원정보 수정]</h2>
+
+    <form action="#" th:action="@{/update}" th:object="${userDTO}" method="post">
+        <input type="hidden" th:field="*{idx}" />
+        <h4>
+            <label>Email:</label>
+        <input type="text" th:field="*{email}" readonly/>
+            <h6 style="color: #b92a1a">*이메일은 변경할 수 없습니다.</h6>
+        </h4>
+
+        <div class="mb-3">
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" />
+        </div>
+
+        <div class="mb-3">
+            <label for="password">Password:</label>
+            <input type="password" id="password" th:field="*{password}" />
+        </div>
+
+        <div class="mb-3">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" th:field="*{phone}" />
+        </div>
+
+        <div class="mb-3">
+            <label for="address">Address:</label>
+            <input type="text" id="address" th:field="*{address}" />
+        </div>
+
+        <div>
+            <button type="submit">Update</button>
+        </div>
+
+    </form>
+
+        <div th:if="${error}">
+            <p th:text="${error}"></p>
+        </div>
+
+        <div th:if="${message}">
+            <p th:text="${message}"></p>
+        </div>
+    </div>
+</div>
+</div>
+    </body>
+</html>

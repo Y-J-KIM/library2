@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head"></head>
+<body>
+<!-- 전체 페이지를 flexbox 컨테이너로 만듭니다 -->
+<div class="d-flex flex-column min-vh-100">
+
+    <!-- 메뉴 바   -->
+    <nav th:replace="layout::navi"></nav>
+
+    <!--메뉴-->
+    <nav th:replace="layout::menu" style="justify-content: center"></nav>
+
+    <!-- 페이지 콘텐츠 -->
+    <div class="container flex-grow-1 d-flex" style="margin-top: 100px">
+
+<div class="container my-3">
+    <!-- 여기부터 시작 -->
+    <div class="my-3 border-bottom">
+        <div>
+            <h4>회원가입</h4>
+        </div>
+    </div>
+    <form th:action="@{/user/register}" th:object="${userCreateForm}" method="post">
+        <div th:replace="layout::formErrors"></div>
+        <div class="mb-3">
+            <label for="name" class="form-label">사용자ID</label>
+            <input type="text" th:field="*{name}" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" th:field="*{email}" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="password1" class="form-label">비밀번호</label>
+            <input type="password" th:field="*{password1}" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="password2" class="form-label">비밀번호 확인</label>
+            <input type="password" th:field="*{password2}" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">휴대폰</label>
+            <input type="text" th:field="*{phone}" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">주소</label>
+            <input type="text" th:field="*{address}" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+
+</div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="layout::head">
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        body {
+            min-height: 2000px;
+            overflow-y: auto;
+            margin-bottom: 50px;
+            padding: 0;
+        }
+
+    </style>
+</head>
+<body>
+<!-- 전체 페이지를 flexbox 컨테이너로 만듭니다 -->
+<div class="d-flex flex-column min-vh-100">
+
+<!-- 상단 네브바 -->
+<nav th:replace="layout::navi"></nav>
+
+<!-- 메뉴 -->
+<nav th:replace="layout::menu" style="justify-content: center"></nav>
+
+<!-- 페이지 콘텐츠 -->
+<div class="container flex-grow-1 d-flex" style="margin-top: 20px">
+
+    <!-- 왼쪽 고정 네브바  -->
+    <div th:replace="layout::bar3"></div>
+
+    <!-- 오른쪽 컨텐츠   -->
+    <div class="container my-3 flex-grow-1">
+<!--        <h4 class="htitle">대출 안내</h4>-->
+
+<!--        <div class="tblWrap">-->
+<!--            <table class="tbl">-->
+<!--&lt;!&ndash;                <caption>대출 안내</caption>&ndash;&gt;-->
+<!--                <colgroup>-->
+<!--                    <col style="width: 20%;" />-->
+<!--                    <col />-->
+<!--                </colgroup>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th scope="col">구분</th>-->
+<!--                    <th scope="col">내용</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                    <th scope="row">대상</th>-->
+<!--                    <td class="ta_l">파주시도서관 회원증 소지자, 책이음 회원증 소지자</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">대출방법</th>-->
+<!--                    <td class="ta_l">본인의 도서관 회원증 제시<br />-->
+<!--                        - 타인의 회원증으로 대출불가<br />-->
+<!--                        - 가족회원을 신청한 경우, 가족의 이름으로 대출가능(본인 회원증 제시 필요)</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">대출권수</th>-->
+<!--                    <td class="ta_l">1인당 7권(DVD 1종 포함)<br />-->
+<!--                        파주시도서관 회원(통합대출권수 30권), 책이음 회원(통합대출권수30권)</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">대출기간</th>-->
+<!--                    <td class="ta_l">14일간<br />-->
+<!--                        - 대출 당일 연장 불가<br />-->
+<!--                        - 1회에 한하여 7일 대출연장 가능(단, 예약되지 않은 도서에 한함)</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">대출제한</th>-->
+<!--                    <td class="ta_l">희귀자료, 참고자료, 귀중자료, 연속간행물, 기타 관장이 필요하다고 인정한 자료</td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+
+<!--        <h4 class="htitle">반납 안내</h4>-->
+
+<!--        <div class="tblWrap">-->
+<!--            <table class="tbl">-->
+<!--                <caption>반납 안내</caption>-->
+<!--                <colgroup>-->
+<!--                    <col style="width: 20%;" />-->
+<!--                    <col />-->
+<!--                </colgroup>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th scope="col">구분</th>-->
+<!--                    <th scope="col">내용</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                    <th scope="row">도서반납</th>-->
+<!--                    <td class="ta_l">- 연체 시 연체일수만큼 대출 정지<br />-->
+<!--                        - 휴관일 및 도서관 운영시간이 지난 경우에는 도서관 밖의 &#39;스마트반납 24시&#39;에 반납 가능 (반납기에서 자동 처리되지 않는 도서는&nbsp;익일 처리)<br />-->
+<!--                        ※ 반납연체도서 문자알림 서비스는 제공되지 않을 수 있음</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">자료변상</th>-->
+<!--                    <td class="ta_l">도서관 자료를 훼손 또는 분실하였을 경우<br />-->
+<!--                        - 동일 자료로 변상<br />-->
+<!--                        - 동일 자료로 변상이 어려울 경우, 사서가 제시하는 동일한 가격대의 대체도서로 구매 변상</td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+
+<!--        <h4 class="htitle">도서예약 안내</h4>-->
+
+<!--        <div class="tblWrap">-->
+<!--            <table class="tbl">-->
+<!--                <caption>도서예약 안내</caption>-->
+<!--                <colgroup>-->
+<!--                    <col style="width: 20%;" />-->
+<!--                    <col />-->
+<!--                </colgroup>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th scope="col">구분</th>-->
+<!--                    <th scope="col">내용</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                    <th scope="row">도서예약</th>-->
+<!--                    <td class="ta_l">- 대출중인 도서에 한해 예약가능<br />-->
+<!--                        - 1인 5권까지 예약가능 (단, 연체로 인한 대출정지 기간에는 예약 불가)<br />-->
+<!--                        - 예약한 도서가 반납되면 문자메시지(SMS)를 통해 안내 발송<br />-->
+<!--                        - 문자메시지 수신일 기준 3일 이내 방문 대출해야하며, 3일이 경과하면 자동 예약 취소<br />-->
+<!--                        - <span style="color: rgb(231, 76, 60);">입수된 예약도서를 책배달 도서로 전환할 수 없음(시스템 처리과정상 불가능)</span></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">예약방법</th>-->
+<!--                    <td class="ta_l">홈페이지 로그인 &gt; 도서검색 &gt; 대출중 확인 &gt; 예약신청 버튼</td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+
+<!--        <h4 class="htitle">우수회원 서비스</h4>-->
+
+<!--        <p class="dot">파주시도서관 다대출자에게 제공하는 서비스</p>-->
+
+<!--        <div class="tblWrap">-->
+<!--            <table class="tbl">-->
+<!--                <caption>우수회원 서비스</caption>-->
+<!--                <colgroup>-->
+<!--                    <col style="width: 20%;" />-->
+<!--                    <col />-->
+<!--                </colgroup>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th scope="col">구분</th>-->
+<!--                    <th scope="col">내용</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                    <th scope="row">이용기간</th>-->
+<!--                    <td class="ta_l">상반기(1~6월) / 하반기(7~12월)</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">대상</th>-->
+<!--                    <td class="ta_l">6개월 동안 통합대출권수 30권 이상 대출자</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <th scope="row">혜택</th>-->
+<!--                    <td class="ta_l">- 1인당 도서 10권 대출(통합대출권수 40권)<br />-->
+<!--                        - DVD 2종 대출(대출기간 7일, 도서대출권수 포함)<br />-->
+<!--                        ※ 도서관별 상이, 이용도서관에 문의</td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; End Of the Real Contents&ndash;&gt;-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
+        <div>
+            <h4>대출 안내</h4>
+        <table class="table" style="border: #5c636a">
+            <thead class="table-light">
+                <tr class="text-center">
+                    <th>구분</th>
+                    <th style="width: 70%">내용</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>대상</td>
+                    <td>도서관 회원증 소지자</td>
+                </tr>
+                <tr>
+                    <td>대출방법</td>
+                    <td>본인의 도서관 회원증 제시
+                        <br>
+                        - 타인의 회원증으로 대출불가</td>
+                </tr>
+                <tr>
+                    <td>대출권수</td>
+                    <td>1인당 5권</td>
+                </tr>
+                <tr>
+                    <td>대출기간</td>
+                    <td>
+                    14일간
+                    <br>
+                    - 대출 당일 연장 불가
+                    <br>
+                    - 1회에 한하여 7일 대출연장 가능(단, 예약되지 않은 도서에 한함)</td>
+                </tr>
+                <tr>
+                    <td>대출제한</td>
+                    <td>희귀자료, 참고자료, 귀중자료, 연속간행물, 기타 관장이 필요하다고 인정한 자료</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <div>
+            <h4>반납 안내</h4>
+        <table class="table" style="border: #5c636a">
+            <thead class="table-light">
+                <tr class="text-center">
+                    <th>구분</th>
+                    <th style="width: 70%">내용</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>도서반납</td>
+                    <td>- 연체 시 연체일수만큼 대출 정지</td>
+                </tr>
+                <tr>
+                    <td>자료변상</td>
+                    <td>도서관 자료를 훼손 또는 분실하였을 경우
+                        <br>
+                        - 동일 자료로 변상
+                        <br>
+                        - 동일 자료로 변상이 어려울 경우, 사서가 제시하는 동일한 가격대의 대체도서로 구매 변상</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <div>
+            <h4>도서예약 안내</h4>
+        <table class="table" style="border: #5c636a">
+            <thead class="table-light">
+            <tr class="text-center">
+                <th>구분</th>
+                <th style="width: 70%">내용</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>도서예약</td>
+                    <td>- 대출중인 도서에 한해 예약가능
+                        <br>
+                        - 1인 5권까지 예약가능 (단, 연체로 인한 대출정지 기간에는 예약 불가)</td>
+                </tr>
+                <tr>
+                    <td>예약방법</td>
+                    <td>홈페이지 로그인 > 도서검색 > 대출중 확인 > 예약신청 버튼</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+
+</div>
+
+
+</div>
+<!-- footer -->
+
+    <footer th:replace="layout::footer"></footer>
+
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-55133790-10', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

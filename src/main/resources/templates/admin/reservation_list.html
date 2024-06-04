@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>예약 리스트</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>예약 리스트</h2>
+    <form method="get" action="/admin/reservations" class="form-inline">
+        <div class="form-group mb-2">
+            <label for="isbn" class="sr-only">ISBN</label>
+            <input type="text" name="rsvBookIsbn" class="form-control" id="isbn" th:value="${rsvBookIsbn}" placeholder="ISBN">
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="userId" class="sr-only">사용자 ID</label>
+            <input type="number" name="rsvUserIdx" class="form-control" id="userId" th:value="${rsvUserIdx}" placeholder="사용자 ID">
+        </div>
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="date" class="sr-only">예약 날짜</label>
+            <input type="date" name="rsvDate" class="form-control" th:value="${rsvDate}" id="date">
+        </div>
+        <div>
+            <label for="includeCancelled">Include Cancelled:</label>
+            <input type="checkbox" id="includeCancelled" name="includeCancelled" th:checked="${includeCancelled}">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">검색</button>
+    </form>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>예약 ID</th>
+            <th>사용자 ID</th>
+            <th>책 ISBN</th>
+            <th>예약 날짜</th>
+            <th>예약 확정 날짜</th>
+            <th>예약 취소 날짜</th>
+            <th>대출 예정일</th>
+            <th>작업</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reservation : ${reservations}">
+            <td th:text="${reservation.rsvIdx}"></td>
+            <td th:text="${reservation.rsvUserIdx}"></td>
+            <td th:text="${reservation.rsvBookIsbn}"></td>
+            <td th:text="${reservation.rsvDate}"></td>
+            <td th:text="${reservation.rsvConfirmDate}"></td>
+            <td th:text="${reservation.rsvCclDate}"></td>
+            <td th:text="${reservation.rsvDueDate}"></td>
+            <td >
+                <a th:if="${reservation.rsvConfirmDate == null}">
+                    <form th:action="@{/confirmReservation/{rsvIdx}(rsvIdx=${reservation.rsvIdx})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to confirm this reservation?')">Confirm</button>
+                    </form>
+                </a>
+                <a th:if="${reservation.rsvCclDate == null}">
+                    <form th:action="@{/cancelReservation/{rsvIdx}(rsvIdx=${reservation.rsvIdx})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to cancel this reservation?')">Cancel</button>
+                    </form>
+                </a>
+<!--                <form th:action="@{/confirmReservation/{rsv_idx}(rsv_idx=${reservation.rsv_idx})}" method="post" style="display:inline; ">-->
+<!--                    <button type="submit" class="btn btn-primary btn-sm">예약 확정</button>-->
+<!--                </form>-->
+<!--                <form th:action="@{/cancelReservation/{rsv_idx}(rsv_idx=${reservation.rsv_idx})}" method="post" style="display:inline;">-->
+<!--                    <button type="submit" class="btn btn-danger" th:if="${reservation.rsv_ccl_date == null}">예약 취소</button>-->
+<!--                 </form>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

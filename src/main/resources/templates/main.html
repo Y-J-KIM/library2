@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head th:replace="layout::head"></head>
+<body>
+<!-- 전체 페이지를 flexbox 컨테이너로 만듭니다 -->
+<div class="d-flex flex-column min-vh-100">
+
+<!-- 메뉴 바   -->
+<nav th:replace="layout::navi"></nav>
+
+<!--메뉴-->
+<nav th:replace="layout::menu" style="justify-content: center"></nav>
+
+    <!-- main content -->
+    <main class="flex-grow-1">
+        <!-- main content will be included here -->
+    </main>
+
+</div>
+<!-- footer -->
+<footer th:replace="layout::footer"></footer>
+
+</body>
+</html>
